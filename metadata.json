@@ -1,0 +1,6 @@
+{
+  "name": "Animation Website Portfolio",
+  "description": "A minimal, premium personal portfolio showcasing animation and website design work in pure red, black, and white.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
