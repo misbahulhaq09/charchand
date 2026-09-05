@@ -190,7 +190,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ location }) =>
                 <img
                   src={location.customImageUrl!.trim()}
                   alt="Currency Tower Location Map"
-                  className="w-full h-full object-cover filter grayscale contrast-125"
+                  className="w-full h-full object-cover contrast-110"
                 />
               ) : (
                 <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-[#050505] text-center">

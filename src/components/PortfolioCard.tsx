@@ -97,7 +97,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ project }) => {
             <img
               src={previewImageSrc}
               alt={`${project.name} Preview`}
-              className="w-full h-full object-cover pt-7 filter grayscale group-hover/image:grayscale-0 transition-all duration-700 ease-out"
+              className="w-full h-full object-cover pt-7 transition-all duration-500 ease-out group-hover/image:scale-[1.01]"
               loading="lazy"
             />
           ) : (
