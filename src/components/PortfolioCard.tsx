@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ExternalLink, AlertCircle } from 'lucide-react';
+import { ExternalLink, AlertCircle, Clock } from 'lucide-react';
 import { PortfolioProject } from '../types';
 
 interface PortfolioCardProps {
@@ -16,14 +16,20 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ project }) => {
   const [showComingSoon, setShowComingSoon] = useState(false);
 
   const hasValidUrl = Boolean(project.websiteUrl && project.websiteUrl.trim() !== '' && project.websiteUrl !== '#');
+  const isComingSoon = Boolean(project.isComingSoon || !hasValidUrl);
 
   const previewImageSrc =
     project.previewImage && project.previewImage.trim() !== ''
       ? project.previewImage.trim()
       : null;
 
+  const previewVideoSrc =
+    project.previewVideo && project.previewVideo.trim() !== ''
+      ? project.previewVideo.trim()
+      : null;
+
   const handleCardClick = () => {
-    if (hasValidUrl) {
+    if (hasValidUrl && !project.isComingSoon) {
       let targetUrl = project.websiteUrl.trim();
       if (!/^https?:\/\//i.test(targetUrl)) {
         targetUrl = 'https://' + targetUrl;
@@ -55,6 +61,11 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ project }) => {
             <span className="font-mono text-[#e50914] font-bold text-sm tracking-wider">
               [ WEBSITE {project.number} ]
             </span>
+            {isComingSoon && (
+              <span className="border border-[#e50914] bg-[#e50914]/20 text-[#ff4444] text-[10px] font-mono px-2 py-0.5 tracking-wider font-bold uppercase">
+                COMING SOON
+              </span>
+            )}
             {project.category && project.category.trim().length > 0 && (
               <>
                 <span className="hidden sm:inline-block w-1 h-1 bg-[#444444]" />
@@ -86,14 +97,35 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ project }) => {
               <div className="w-2 h-2 rounded-full bg-[#333333]" />
               <div className="w-2 h-2 rounded-full bg-[#333333]" />
             </div>
-            <div className="bg-[#111111] px-3 py-0.5 border border-[#222222] text-[10px] font-mono text-[#777777] max-w-[200px] truncate">
-              {hasValidUrl ? project.websiteUrl.replace(/^https?:\/\//i, '') : 'preview.design'}
+            <div className="bg-[#111111] px-3 py-0.5 border border-[#222222] text-[10px] font-mono text-[#777777] max-w-[200px] truncate flex items-center gap-1.5">
+              {isComingSoon && <span className="w-1.5 h-1.5 rounded-full bg-[#e50914] animate-pulse shrink-0" />}
+              <span>{hasValidUrl && !project.isComingSoon ? project.websiteUrl.replace(/^https?:\/\//i, '') : 'coming-soon.design'}</span>
             </div>
             <div className="w-4" />
           </div>
 
-          {/* Website Screenshot or Minimal Studio Placeholder */}
-          {previewImageSrc ? (
+          {/* Website Video, Screenshot, or Minimal Studio Placeholder */}
+          {previewVideoSrc ? (
+            <div className="relative w-full h-full pt-7 bg-black overflow-hidden">
+              <video
+                src={previewVideoSrc}
+                poster={previewImageSrc || undefined}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="w-full h-full object-cover transition-all duration-500 ease-out group-hover/image:scale-[1.01]"
+              />
+              {/* Subtle top-right video indicator */}
+              <div className="absolute top-9 right-3 z-10 bg-black/80 backdrop-blur-sm border border-[#333333] px-2.5 py-0.5 flex items-center gap-1.5 pointer-events-none">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#e50914] animate-pulse" />
+                <span className="font-mono text-[9px] text-[#e0e0e0] font-bold tracking-widest uppercase">
+                  CINEMATIC FILM
+                </span>
+              </div>
+            </div>
+          ) : previewImageSrc ? (
             <img
               src={previewImageSrc}
               alt={`${project.name} Preview`}
@@ -106,35 +138,51 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ project }) => {
               <div className="absolute inset-0 pt-7 bg-[linear-gradient(to_right,#1f1f1f_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f_1px,transparent_1px)] bg-[size:36px_36px] opacity-35" />
               
               <div className="relative z-10 flex flex-col items-center justify-center p-6 text-center">
-                <div className="border border-[#222222] bg-black/60 px-4 py-2 mb-3">
+                <div className="border border-[#e50914] bg-black/80 px-4 py-2 mb-3 flex items-center gap-2.5">
+                  <span className="w-2 h-2 rounded-full bg-[#e50914] animate-pulse" />
                   <span className="font-mono text-[#e50914] text-xs font-bold tracking-[0.3em] uppercase">
-                    [ WEBSITE {project.number} ]
+                    {isComingSoon ? 'COMING SOON' : `[ WEBSITE ${project.number} ]`}
                   </span>
                 </div>
                 <span className="text-xl sm:text-2xl font-bold text-white tracking-widest uppercase font-mono">
                   {project.name}
                 </span>
-                <span className="text-[10px] font-mono tracking-widest text-[#666666] uppercase mt-2">
-                  Preview in preparation
+                <span className="text-[10px] font-mono tracking-widest text-[#888888] uppercase mt-2">
+                  {isComingSoon ? 'PROJECT IN DEVELOPMENT' : 'Preview in preparation'}
                 </span>
               </div>
+            </div>
+          )}
+
+          {/* Sleek Coming Soon Center Badge Overlay if coming soon AND an image exists */}
+          {isComingSoon && previewImageSrc && (
+            <div className="absolute inset-0 pt-7 bg-black/40 backdrop-blur-[2px] flex flex-col items-center justify-center pointer-events-none z-10 select-none">
+              <div className="border border-[#e50914] bg-black/90 px-6 py-3 shadow-2xl flex items-center gap-3">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#e50914] animate-pulse" />
+                <span className="font-mono text-white text-xs sm:text-sm font-bold tracking-[0.3em] uppercase">
+                  COMING SOON
+                </span>
+              </div>
+              <span className="text-[10px] font-mono tracking-[0.25em] text-[#cccccc] uppercase mt-2.5 drop-shadow">
+                PROJECT IN DEVELOPMENT
+              </span>
             </div>
           )}
 
           {/* Minimal dark overlay on hover */}
           <div className="absolute inset-0 bg-black/20 group-hover/image:bg-transparent transition-colors duration-300 pointer-events-none" />
 
-          {/* "Coming Soon" Toast Overlay if URL is empty */}
+          {/* "Coming Soon" Toast Overlay if clicked */}
           {showComingSoon && (
-            <div className="absolute inset-0 z-30 bg-black/90 flex flex-col items-center justify-center p-6 text-center animate-fade-in">
+            <div className="absolute inset-0 z-30 bg-black/95 flex flex-col items-center justify-center p-6 text-center animate-fade-in">
               <div className="p-3 border border-[#e50914] bg-black mb-3">
-                <AlertCircle className="w-6 h-6 text-[#e50914]" />
+                <Clock className="w-6 h-6 text-[#e50914]" />
               </div>
               <h4 className="text-lg font-bold text-white tracking-widest uppercase mb-1">
                 Coming Soon
               </h4>
-              <p className="text-xs text-[#888888] max-w-sm">
-                The live URL for this project will be added soon.
+              <p className="text-xs text-[#aaaaaa] max-w-sm font-mono tracking-wide">
+                The live website for this project is currently in development and will be released soon.
               </p>
             </div>
           )}
@@ -153,14 +201,24 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({ project }) => {
             )}
           </div>
 
-          {/* Action Button: Normal Pure Red */}
-          <button
-            onClick={handleCardClick}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#e50914] text-white text-xs font-bold tracking-[0.2em] uppercase border border-[#e50914] hover:bg-white hover:text-black hover:border-white transition-all duration-200 cursor-pointer select-none"
-          >
-            <span>VIEW WEBSITE</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </button>
+          {/* Action Button: VIEW WEBSITE or COMING SOON */}
+          {hasValidUrl && !project.isComingSoon ? (
+            <button
+              onClick={handleCardClick}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#e50914] text-white text-xs font-bold tracking-[0.2em] uppercase border border-[#e50914] hover:bg-white hover:text-black hover:border-white transition-all duration-200 cursor-pointer select-none"
+            >
+              <span>VIEW WEBSITE</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </button>
+          ) : (
+            <button
+              onClick={handleCardClick}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#e50914] text-white text-xs font-bold tracking-[0.2em] uppercase border border-[#e50914] hover:bg-white hover:text-black hover:border-white transition-all duration-200 cursor-pointer select-none"
+            >
+              <Clock className="w-3.5 h-3.5" />
+              <span>COMING SOON</span>
+            </button>
+          )}
         </div>
       </div>
     </motion.div>

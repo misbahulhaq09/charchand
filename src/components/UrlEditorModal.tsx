@@ -224,17 +224,31 @@ export const UrlEditorModal: React.FC<UrlEditorModalProps> = ({
                       />
                     </div>
 
-                    <div>
-                      <label className="text-[10px] font-mono uppercase text-[#777777] block mb-1">
-                        Preview Image URL
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Image URL..."
-                        value={proj.previewImage}
-                        onChange={(e) => handleProjectChange(proj.id, 'previewImage', e.target.value)}
-                        className="w-full bg-[#111111] border border-[#333333] px-3 py-1.5 text-[11px] font-mono text-[#aaaaaa] focus:border-[#e50914] outline-none"
-                      />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-[10px] font-mono uppercase text-[#777777] block mb-1">
+                          Preview Image URL (Poster)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Image URL..."
+                          value={proj.previewImage}
+                          onChange={(e) => handleProjectChange(proj.id, 'previewImage', e.target.value)}
+                          className="w-full bg-[#111111] border border-[#333333] px-3 py-1.5 text-[11px] font-mono text-[#aaaaaa] focus:border-[#e50914] outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-mono uppercase text-[#777777] block mb-1">
+                          Preview Video URL (Optional .mp4)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="/char-chand-hero.mp4 or video URL..."
+                          value={proj.previewVideo || ''}
+                          onChange={(e) => handleProjectChange(proj.id, 'previewVideo', e.target.value)}
+                          className="w-full bg-[#111111] border border-[#333333] px-3 py-1.5 text-[11px] font-mono text-[#aaaaaa] focus:border-[#e50914] outline-none"
+                        />
+                      </div>
                     </div>
                   </div>
                 ))}

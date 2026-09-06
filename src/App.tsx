@@ -27,6 +27,7 @@ export default function App() {
               return {
                 ...INITIAL_PROJECTS[0],
                 previewImage: '/char-chand.png',
+                previewVideo: '/char-chand-hero.mp4',
                 websiteUrl: 'https://charchand.netlify.app/'
               };
             }
@@ -34,7 +35,15 @@ export default function App() {
               return {
                 ...INITIAL_PROJECTS[1],
                 previewImage: '/deeva-luxury-jewellery.png',
+                previewVideo: '/deeva-luxury-jewellery.mp4',
                 websiteUrl: 'https://deevaluxuryjewellery.netlify.app/'
+              };
+            }
+            if (p.id === 'project-03') {
+              return {
+                ...INITIAL_PROJECTS[2],
+                previewImage: '/bomdia-cafe.png',
+                websiteUrl: 'https://bomdia-cafe.netlify.app/#menu'
               };
             }
             if (p.id === 'project-04') {
@@ -42,6 +51,14 @@ export default function App() {
                 ...INITIAL_PROJECTS[3],
                 previewImage: '/simnani-group.png',
                 websiteUrl: 'https://simnanigroup.co.in/'
+              };
+            }
+            if (p.id === 'project-05') {
+              return {
+                ...INITIAL_PROJECTS[4],
+                previewImage: '',
+                isComingSoon: true,
+                websiteUrl: ''
               };
             }
             return {

@@ -7,6 +7,7 @@ export const INITIAL_PROJECTS: PortfolioProject[] = [
     name: 'CHAR CHAND HAUTE COUTURE',
     category: 'Luxury Indian Fashion & Couture Atelier',
     previewImage: '/char-chand.png',
+    previewVideo: '/char-chand-hero.mp4',
     websiteUrl: 'https://charchand.netlify.app/',
     year: '2026',
     aspect: 'wide'
@@ -17,6 +18,7 @@ export const INITIAL_PROJECTS: PortfolioProject[] = [
     name: 'DEEVA LUXURY JEWELLERY',
     category: 'Lab Grown Luxury Fine Jewelry',
     previewImage: '/deeva-luxury-jewellery.png',
+    previewVideo: '/deeva-luxury-jewellery.mp4',
     websiteUrl: 'https://deevaluxuryjewellery.netlify.app/',
     year: '2026',
     aspect: 'wide'
@@ -24,11 +26,11 @@ export const INITIAL_PROJECTS: PortfolioProject[] = [
   {
     id: 'project-03',
     number: '03',
-    name: 'KINETIC CREATIVE LAB',
-    category: 'Interactive Production & Digital Experience',
-    previewImage: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600&q=80',
-    websiteUrl: '',
-    year: '2025',
+    name: 'BOM-DIA COFFEE CO.',
+    category: 'Artisanal Cafe & Premium Specialty Roastery',
+    previewImage: '/bomdia-cafe.png',
+    websiteUrl: 'https://bomdia-cafe.netlify.app/#menu',
+    year: '2026',
     aspect: 'wide'
   },
   {
@@ -46,10 +48,11 @@ export const INITIAL_PROJECTS: PortfolioProject[] = [
     number: '05',
     name: 'VERVE EDITORIAL PUBLISHING',
     category: 'Contemporary Art & Design Journal',
-    previewImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1600&q=80',
+    previewImage: '',
     websiteUrl: '',
     year: '2025',
-    aspect: 'wide'
+    aspect: 'wide',
+    isComingSoon: true
   }
 ];
 

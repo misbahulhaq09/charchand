@@ -4,9 +4,11 @@ export interface PortfolioProject {
   name: string;
   category: string;
   previewImage: string;
+  previewVideo?: string;
   websiteUrl: string;
   year?: string;
   aspect?: 'wide' | 'standard';
+  isComingSoon?: boolean;
 }
 
 export interface ContactProfile {
