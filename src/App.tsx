@@ -43,6 +43,7 @@ export default function App() {
               return {
                 ...INITIAL_PROJECTS[2],
                 previewImage: '/bomdia-cafe.png',
+                previewVideo: '/bomdia-cafe.mp4',
                 websiteUrl: 'https://bomdia-cafe.netlify.app/#menu'
               };
             }
@@ -50,6 +51,7 @@ export default function App() {
               return {
                 ...INITIAL_PROJECTS[3],
                 previewImage: '/simnani-group.png',
+                previewVideo: '/simnani-group.mp4',
                 websiteUrl: 'https://simnanigroup.co.in/'
               };
             }

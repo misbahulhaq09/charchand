@@ -29,6 +29,7 @@ export const INITIAL_PROJECTS: PortfolioProject[] = [
     name: 'BOM-DIA COFFEE CO.',
     category: 'Artisanal Cafe & Premium Specialty Roastery',
     previewImage: '/bomdia-cafe.png',
+    previewVideo: '/bomdia-cafe.mp4',
     websiteUrl: 'https://bomdia-cafe.netlify.app/#menu',
     year: '2026',
     aspect: 'wide'
@@ -39,6 +40,7 @@ export const INITIAL_PROJECTS: PortfolioProject[] = [
     name: 'SIMNANI GROUP',
     category: 'Real Estate & Infrastructure Development',
     previewImage: '/simnani-group.png',
+    previewVideo: '/simnani-group.mp4',
     websiteUrl: 'https://simnanigroup.co.in/',
     year: '2025',
     aspect: 'wide'
