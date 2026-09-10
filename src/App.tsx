@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
+import DotField from './components/DotField';
 import { PortfolioCard } from './components/PortfolioCard';
 import { ContactSection } from './components/ContactSection';
 import { LocationSection } from './components/LocationSection';
@@ -176,18 +177,18 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-black text-white selection:bg-[#e50914] selection:text-white flex flex-col font-sans overflow-x-hidden">
-      {/* Fullscreen Looping Background Animation Video */}
+      {/* Fullscreen Interactive DotField Background (React Bits) */}
       <div className="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260606_154941_df1a96e1-a06f-450c-bd02-d863414cc1a0.mp4"
+        <DotField
+          dotRadius={1.5}
+          dotSpacing={14}
+          bulgeStrength={67}
+          glowRadius={160}
+          sparkle={false}
+          waveAmplitude={0}
         />
-        {/* Atmospheric dark overlay for optimal legibility and contrast */}
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-[0.5px]" />
+        {/* Subtle dark vignette overlay for optimal legibility and contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/70 pointer-events-none" />
       </div>
 
       {/* Foreground Website Content */}
